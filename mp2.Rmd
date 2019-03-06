@@ -7,7 +7,7 @@ output:
     code_folding: show
 ---
 
-This is the second edit I'm making!
+This is the second edit I'm making.
 ## Loading the data
 
 This project is so interesting and relevant to my life!
