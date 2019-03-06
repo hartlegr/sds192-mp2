@@ -10,7 +10,7 @@ Hey guys
 This is the second edit I'm making.
 ## Loading the data
 
-This project is so interesting and relevant to my life!
+This project is so interesting and relevant to my life! nope it's not
 
 ```{r, message=FALSE}
 library(tidyverse)
