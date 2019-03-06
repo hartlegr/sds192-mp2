@@ -13,7 +13,7 @@ This is the second edit I'm making.
 >>>>>>> 696c02a5ef9d79b4878fe3fa55f0b079f1e40288
 ## Loading the data
 
-This project is so interesting and relevant to my life!
+This project is so interesting and relevant to my life! nope it's not
 
 ```{r, message=FALSE}
 library(tidyverse)
