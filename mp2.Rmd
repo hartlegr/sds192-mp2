@@ -1,13 +1,16 @@
 ---
 title: "Mini-Project 2"
-author: "Your Name Here"
+author: "Grace Hartley, Amrita Acharya, Callie Slevin"
 date: "2019-03-24"
 output: 
   html_document:
     code_folding: show
 ---
-Hi
 
+hi
+
+This is the second edit I'm making.
+>>>>>>> 696c02a5ef9d79b4878fe3fa55f0b079f1e40288
 ## Loading the data
 
 This project is so interesting and relevant to my life!
