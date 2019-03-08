@@ -6,14 +6,18 @@ output:
   html_document:
     code_folding: show
 ---
+<<<<<<< HEAD
 
-hi
 
+
+
+
+>>>>>>> 718bebaf773b4f658568ccd7f09f51f698826104
 This is the second edit I'm making.
 >>>>>>> 696c02a5ef9d79b4878fe3fa55f0b079f1e40288
 ## Loading the data
 
-This project is so interesting and relevant to my life! nope it's not
+This project is so interesting and relevant to my life! 
 
 ```{r, message=FALSE}
 library(tidyverse)
@@ -21,6 +25,7 @@ load("house_elections.rda")
 load("candidates.rda")
 load("committees.rda")
 load("contributions.rda")
-```
+devtools::install_github("benmarwick/wordcountaddin")
 
+``
 > Word count: `r wordcountaddin::word_count()`
