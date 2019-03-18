@@ -18,10 +18,16 @@ This is the second edit I'm making.
 ## Loading the data
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 This project is so interesting and relevant to my life! 
 =======
-Chicken
+
 >>>>>>> a2167ceaf3998d52e010f88e520eda780ee911e9
+=======
+=======
+This project is so interesting and relevant to my life! 
+>>>>>>> 3b2d9a8e1dd1ce2344f1d9b10db770a23cd8f270
+>>>>>>> 123765c8a851758b4ab5ac021ed39f38ee069ce7
 
 ```{r, message=FALSE}
 library(tidyverse)
