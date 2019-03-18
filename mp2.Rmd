@@ -17,7 +17,11 @@ This is the second edit I'm making.
 >>>>>>> 696c02a5ef9d79b4878fe3fa55f0b079f1e40288
 ## Loading the data
 
+<<<<<<< HEAD
 This project is so interesting and relevant to my life! 
+=======
+Chicken
+>>>>>>> a2167ceaf3998d52e010f88e520eda780ee911e9
 
 ```{r, message=FALSE}
 library(tidyverse)
