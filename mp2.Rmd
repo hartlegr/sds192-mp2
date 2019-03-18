@@ -10,7 +10,6 @@ Hey guys
 This is the second edit I'm making.
 ## Loading the data
 
-Chicken
 
 ```{r, message=FALSE}
 library(tidyverse)
