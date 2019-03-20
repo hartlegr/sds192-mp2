@@ -16,4 +16,14 @@ load("contributions.rda")
 devtools::install_github("benmarwick/wordcountaddin")
 
 ``
-> Word count: `r wordcountaddin::word_count()`
+> Word count: `r wordcountaddin::word_count()'
+
+```
+
+
+```{r}
+candcont <- candidates%>% 
+  left_join(contributions, "cand_id")
+```
+
+
