@@ -26,4 +26,10 @@ candcont <- candidates%>%
   left_join(contributions, "cand_id")
 ```
 
+```{r}
+candcont%>%
+  group_by(year)%>%
+  
+
+```
 
