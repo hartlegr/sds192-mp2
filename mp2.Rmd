@@ -39,3 +39,9 @@ candcont%>%
 ```{r}
 ron_kind <- candidates %>%
   filter(cand_name == "KIND, RON")
+```
+
+```{r}
+library(Stat2Data)
+tally(~transaction_type, data = candcont)
+```
