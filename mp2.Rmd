@@ -6,28 +6,6 @@ output:
   html_document:
     code_folding: show
 ---
-<<<<<<< HEAD
-
-
-
-
-
->>>>>>> 718bebaf773b4f658568ccd7f09f51f698826104
-This is the second edit I'm making.
->>>>>>> 696c02a5ef9d79b4878fe3fa55f0b079f1e40288
-## Loading the data
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-This project is so interesting and relevant to my life! 
-=======
-
->>>>>>> a2167ceaf3998d52e010f88e520eda780ee911e9
-=======
-=======
-This project is so interesting and relevant to my life! 
->>>>>>> 3b2d9a8e1dd1ce2344f1d9b10db770a23cd8f270
->>>>>>> 123765c8a851758b4ab5ac021ed39f38ee069ce7
 
 ```{r, message=FALSE}
 library(tidyverse)
