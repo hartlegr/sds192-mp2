@@ -33,3 +33,6 @@ candcont%>%
 
 ```
 
+```{r}
+ron_kind <- candidates %>%
+  filter(cand_name == "KIND, RON")
