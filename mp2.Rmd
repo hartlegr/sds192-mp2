@@ -28,7 +28,10 @@ candcont <- candidates%>%
 
 ```{r}
 candcont%>%
-  group_by(year)%>%
+  group_by(cand_id)%>%
+  summarize(total_cont = sum(transaction_amt))%>%
+  filter(cand_election_yr == 2012)%>% 
+  filter(cand_ici== "I")
   
 
 ```
