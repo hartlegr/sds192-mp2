@@ -85,3 +85,8 @@ contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici, log10(transaction_am
 contrib_foragplot
 ```
 
+Generalized function:
+
+
+Graphic(s) + analysis:
+
