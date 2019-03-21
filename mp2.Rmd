@@ -28,6 +28,7 @@ cand_contrib <- candidates%>%
   left_join(contributions, "cand_id")
 ```
 
+We first filtered xyz... 
 ```{r}
 cand_contrib%>%
   filter(cand_election_yr == 2012)%>% 
@@ -49,6 +50,7 @@ library(Stat2Data)
 tally(~transaction_type, data = cand_contrib)
 ```
 
+Then, we...
 ```{r}
 cand_contrib <- cand_contrib%>%
   filter(cand_election_yr == 2012)%>% 
@@ -56,12 +58,16 @@ cand_contrib <- cand_contrib%>%
   mutate(for_cand = ifelse(transaction_type == "24K"|transaction_type ==  "24E", "forcan","agcan"))
 ```
 
+
 ```{r}
 contrib_for <- cand_contrib %>%
   filter(for_cand == "forcan")
 
 contrib_ag <- cand_contrib %>%
   filter(for_cand == "agcan")
+```
+
+```{r}
 
 boxplot <- ggplot(cand_contrib, aes(for_cand, log10(transaction_amt))) + geom_boxplot(color = "cornflowerblue")
 boxplot
