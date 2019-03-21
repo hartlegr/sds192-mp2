@@ -9,6 +9,8 @@ output:
 
 ```{r, message=FALSE}
 library(tidyverse)
+
+
 load("house_elections.rda")
 load("candidates.rda")
 load("committees.rda")
