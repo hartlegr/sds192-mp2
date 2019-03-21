@@ -50,7 +50,8 @@ tally(~transaction_type, data = candcont)
 ```
 
 ```{r}
-candcont%>%
+candcont <- candcont%>%
   filter(cand_election_yr == 2012)%>% 
   group_by(transaction_type)%>%
-  mutate(for_cand = ifelse("24K", "24E"))
+  mutate(for_cand = ifelse(transaction_type == "24K"|transaction_type ==  "24E", 'forcan','agcan'))
+```
