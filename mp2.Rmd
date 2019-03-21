@@ -51,5 +51,13 @@ tally(~transaction_type, data = candcont)
 candcont <- candcont%>%
   filter(cand_election_yr == 2012)%>% 
   group_by(transaction_type)%>%
-  mutate(for_cand = ifelse(transaction_type == "24K"|transaction_type ==  "24E", 'forcan','agcan'))
+  mutate(for_cand = ifelse(transaction_type == "24K"|transaction_type ==  "24E", "forcan","agcan"))
+```
+
+```{r}
+candcont_for <- candcont %>%
+  filter(for_cand == "forcan")
+
+boxplot <- ggplot(candcont, aes(for_cand, log10(transaction_amt))) + geom_boxplot(color = "cornflowerblue")
+boxplot
 ```
