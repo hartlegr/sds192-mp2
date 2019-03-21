@@ -70,7 +70,7 @@ contrib_forplot <- ggplot(contrib_for, aes(x = cand_ici, log10(transaction_amt))
 
 contrib_forplot
 
-contrib_agplot <- ggplot(contrib_ag, aes(x = cand_ici, log10(transaction_amt))) + geom_boxplot()
+contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici, log10(transaction_amt))) + geom_boxplot() + facet_wrap(~for_cand) 
 
-contrib_agplot
+contrib_foragplot
 ```
