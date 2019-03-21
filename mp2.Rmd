@@ -30,8 +30,11 @@ candcont <- candidates%>%
 candcont%>%
   filter(cand_election_yr == 2012)%>% 
   filter(cand_ici== "I")%>%
+  group_by()
+  mutate(transaction_type, forcand = "24K"| "24E")
   group_by(cand_id, cand_name)%>%
-  summarize(total_cont = sum(transaction_amt))
+  summarize(total_cont = sum(transaction_amt))%>% 
+  boxplot <- ggplot(candcont, aes(x = cand_ici, y = )
   
 
 ```
