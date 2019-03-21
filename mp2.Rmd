@@ -7,6 +7,8 @@ output:
     code_folding: hide
 ---
 
+^[https://github.com/hartlegr/sds192-mp2]
+
 ```{r, message=FALSE}
 library(tidyverse)
 
@@ -58,7 +60,7 @@ cand_contrib <- cand_contrib%>%
   mutate(for_cand = ifelse(transaction_type == "24K"|transaction_type ==  "24E", "forcan","agcan"))
 ```
 
-
+The last part of the data wrangling process included...
 ```{r}
 contrib_for <- cand_contrib %>%
   filter(for_cand == "forcan")
@@ -82,3 +84,4 @@ contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici, log10(transaction_am
 
 contrib_foragplot
 ```
+
