@@ -48,3 +48,9 @@ ron_kind <- candidates %>%
 library(Stat2Data)
 tally(~transaction_type, data = candcont)
 ```
+
+```{r}
+candcont%>%
+  filter(cand_election_yr == 2012)%>% 
+  group_by(transaction_type)%>%
+  mutate(for_cand = ifelse("24K", "24E"))
