@@ -100,7 +100,7 @@ contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici), log10(transaction_a
 contrib_foragplot
 ```
 Generalized function:
-
+(any year?)
 
 Graphic(s) + analysis:
 
