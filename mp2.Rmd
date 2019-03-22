@@ -11,7 +11,7 @@ output:
 
 ```{r, message=FALSE}
 library(tidyverse)
-
+library(extrafont)
 load("house_elections.rda")
 load("candidates.rda")
 load("committees.rda")
@@ -96,9 +96,18 @@ contrib_forplot <- ggplot(contrib_for, aes(x = cand_ici), log10(transaction_amt)
 contrib_forplot
 ```
 
+
 ```{r}
-contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici), log10(transaction_amt)) + geom_bar( fill = "darkgoldenrod1") + facet_wrap(~for_cand) +
-  theme_economist()
+labels<-c(agcan="Against Canidate", forcan="For Canidate")
+
+```
+
+```{r}
+contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici), transaction_amt) + geom_bar( fill = "darkgoldenrod1") + facet_wrap(~for_cand, labeller=labeller(for_cand=labels)) +
+  theme_economist()+
+  xlab("")+
+  scale_x_discrete(labels=c("Challenger", "Incumbent", "Open Seat"))+
+  ylab("Total contributions (US $)")
 
 contrib_foragplot
 ```
