@@ -35,7 +35,7 @@ cand_contrib%>%
   filter(cand_election_yr == 2012)%>% 
   filter(cand_ici== "I")%>%
   group_by(cand_id, cand_name)%>%
-  summarize(total_cont = sum(transaction_amt))
+  summarize(total_cont = sum(transaction_amt, na.rm = TRUE))
   
   
 
@@ -57,6 +57,7 @@ cand_contrib <- cand_contrib%>%
   filter(cand_election_yr == 2012)%>% 
   group_by(transaction_type)%>%
   mutate(for_cand = ifelse(transaction_type == "24K"|transaction_type ==  "24E", "forcan","agcan"))
+  na.rm = TRUE
 ```
 
 The last part of the data wrangling process included...
@@ -79,11 +80,20 @@ contrib_forplot <- ggplot(contrib_for, aes(x = cand_ici, log10(transaction_amt))
 
 contrib_forplot
 
-contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici, log10(transaction_amt))) + geom_boxplot() + facet_wrap(~for_cand) 
+contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici, log10(transaction_amt))) + geom_boxplot(color = "cornflowerblue") + facet_wrap(~for_cand) 
 
 contrib_foragplot
 ```
 
+```{r}
+contrib_forplot <- ggplot(contrib_for, aes(x = cand_ici), log10(transaction_amt)) + geom_bar()
+
+contrib_forplot
+
+contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici), log10(transaction_amt)) + geom_bar(color = "cornflowerblue", fill = "darkgoldenrod1") + facet_wrap(~for_cand) 
+
+contrib_foragplot
+```
 Generalized function:
 
 
