@@ -98,7 +98,7 @@ contrib_forplot
 
 
 ```{r}
-labels<-c(agcan="Against Canidate", forcan="For Canidate")
+labels<-c(agcan="Against Candidate", forcan="For Candidate")
 
 ```
 
