@@ -113,6 +113,7 @@ contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici), transaction_amt) + 
 
 contrib_foragplot
 ```
+
 This displays that the most money was spent against challengers, and the least money was spent against canidates where there was no incumbent. However, the variation between the three categories is small. This might be due to...
 
 We can also see that in 2012, the most money was spent for incumbents by far. Incumbents might have more support because they have had more time to gain the trust of their constituents. (this isn't saying what I'm trying to say lol)
