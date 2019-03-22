@@ -41,7 +41,7 @@ cand_contrib%>%
 
 ```
 
-```{r}
+```{r, eval=FALSE}
 ron_kind <- candidates %>%
   filter(cand_name == "KIND, RON")
 ```
