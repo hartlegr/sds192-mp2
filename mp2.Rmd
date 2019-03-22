@@ -63,7 +63,10 @@ cand_contrib <- cand_contrib%>%
 The last part of the data wrangling process included...
 ```{r}
 contrib_for <- cand_contrib %>%
+  
   filter(for_cand == "forcan")
+#  filter(is.na("for_cand"))
+ 
 
 contrib_ag <- cand_contrib %>%
   filter(for_cand == "agcan")
@@ -86,11 +89,13 @@ contrib_foragplot
 ```
 
 ```{r}
+library(ggthemes)
 contrib_forplot <- ggplot(contrib_for, aes(x = cand_ici), log10(transaction_amt)) + geom_bar()
 
 contrib_forplot
 
-contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici), log10(transaction_amt)) + geom_bar(color = "cornflowerblue", fill = "darkgoldenrod1") + facet_wrap(~for_cand) 
+contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici), log10(transaction_amt)) + geom_bar( fill = "darkgoldenrod1") + facet_wrap(~for_cand) +
+  theme_economist()
 
 contrib_foragplot
 ```
