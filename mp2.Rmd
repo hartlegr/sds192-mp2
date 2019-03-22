@@ -19,7 +19,7 @@ load("contributions.rda")
 #devtools::install_github("benmarwick/wordcountaddin")
 
 
- #Word count: `r wordcountaddin::word_count()'
+wordcountaddin::word_count("mp2.rmd")
 
 ```
 
