@@ -23,13 +23,13 @@ load("contributions.rda")
 
 ```
 
-
+First, we joined the candidates table and the contributions table using the "cand_id."
 ```{r}
 cand_contrib <- candidates%>% 
   left_join(contributions, "cand_id")
 ```
 
-We first filtered xyz... 
+ 
 ```{r, message=FALSE, eval=FALSE}
 cand_contrib%>%
   filter(cand_election_yr == 2012)%>% 
@@ -51,7 +51,7 @@ library(Stat2Data)
 tally(~transaction_type, data = cand_contrib)
 ```
 
-Then, we...
+Then, we only filtered out canidates who last ran in 2012, removing the rows with NA data. We grouped by transaction type, and then...
 ```{r}
 cand_contrib <- cand_contrib%>%
   filter(cand_election_yr == 2012)%>% 
@@ -61,7 +61,7 @@ cand_contrib <- cand_contrib%>%
  
 ```
 
-The last part of the data wrangling process included...
+
 ```{r, message=FALSE, warning=FALSE}
 contrib_for <- cand_contrib %>%
   filter(!is.na("for_cand"))%>%
@@ -102,6 +102,7 @@ labels<-c(agcan="Against Canidate", forcan="For Canidate")
 
 ```
 
+The bar graph implemented here displays the amount of money contributed to the campaigns of: challengers, incumbents, and open seat canidates in the year 2012. The graphic on the left shows money spent against the canidate, and the graphic on the right shows money spent in favor of the canidate. 
 ```{r}
 library(ggthemes)
 contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici), transaction_amt) + geom_bar( fill = "darkgoldenrod1") + facet_wrap(~for_cand, labeller=labeller(for_cand=labels)) +
@@ -112,7 +113,9 @@ contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici), transaction_amt) + 
 
 contrib_foragplot
 ```
+This displays that the most money was spent against challengers, and the least money was spent against canidates where there was no incumbent. However, the variation between the three categories is small. This might be due to...
 
+We can also see that in 2012, the most money was spent for incumbents by far. Incumbents might have more support because they have had more time to gain the trust of their constituents. (this isn't saying what I'm trying to say lol)
 
 Generalized function:
 ```{r}
@@ -139,9 +142,9 @@ contrib_foragplot
 ```{r}
 years<-c(1990, 1992, 1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010, 2012, 2014)
 
-contrib_any_year(2004)
+#contrib_any_year(2004)
 ```
+(^only works in 2012?)
 
-^ why does this only work in 2012?
-Graphic(s) + analysis:
+
 
