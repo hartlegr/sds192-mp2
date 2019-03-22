@@ -16,9 +16,11 @@ load("house_elections.rda")
 load("candidates.rda")
 load("committees.rda")
 load("contributions.rda")
-#devtools::install_github("benmarwick/wordcountaddin")
+devtools::install_github("benmarwick/wordcountaddin", type="source", dependencies=TRUE)
 
+```
 
+```{r}
 wordcountaddin::word_count("mp2.rmd")
 
 ```
