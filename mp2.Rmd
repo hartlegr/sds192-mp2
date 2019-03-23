@@ -1,5 +1,5 @@
 ---
-title: "Mini-Project 2"
+title: "Mini-Project 2: Do Incumbents Receive More Money?"
 author: "Grace Hartley, Amrita Acharya, Callie Slevin"
 date: "2019-03-24"
 output: 
@@ -29,7 +29,6 @@ cand_contrib <- candidates%>%
 ```
 
 
-
 ```{r, eval=FALSE}
 library(Stat2Data)
 tally(~transaction_type, data = cand_contrib)
@@ -45,17 +44,6 @@ cand_contrib <- cand_contrib%>%
  
 ```
 
-
-```{r, message=FALSE, warning=FALSE}
-contrib_for <- cand_contrib %>%
-  filter(!is.na("for_cand"))%>%
-  filter(for_cand == "forcan")
- 
-
-contrib_ag <- cand_contrib %>%
-  filter(for_cand == "agcan")%>%
-  filter(!is.na("ag_cand"))
-```
 
 
 
@@ -110,6 +98,17 @@ years<-c(1990, 1992, 1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010, 2012,
 #contrib_any_year(2004)
 ```
 We tried to do more than one year, but failed because...2012
+
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+contrib_for <- cand_contrib %>%
+  filter(!is.na("for_cand"))%>%
+  filter(for_cand == "forcan")
+ 
+
+contrib_ag <- cand_contrib %>%
+  filter(for_cand == "agcan")%>%
+  filter(!is.na("ag_cand"))
+```
 
 ```{r, warning=FALSE, eval=FALSE}
 
