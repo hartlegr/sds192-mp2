@@ -28,22 +28,7 @@ cand_contrib <- candidates%>%
   left_join(contributions, "cand_id")
 ```
 
- 
-```{r, message=FALSE, eval=FALSE}
-cand_contrib%>%
-  filter(cand_election_yr == 2012)%>% 
-  filter(cand_ici== "I")%>%
-  group_by(cand_id, cand_name)%>%
-  summarize(total_cont = sum(transaction_amt, na.rm = TRUE))
-  
-  
 
-```
-
-```{r, eval=FALSE}
-ron_kind <- candidates %>%
-  filter(cand_name == "KIND, RON")
-```
 
 ```{r, eval=FALSE}
 library(Stat2Data)
@@ -72,43 +57,23 @@ contrib_ag <- cand_contrib %>%
   filter(!is.na("ag_cand"))
 ```
 
-```{r, warning=FALSE, eval=FALSE}
-
-boxplot <- ggplot(cand_contrib, aes(for_cand, log10(transaction_amt))) + geom_boxplot(color = "cornflowerblue")
-boxplot
-```
-
-```{r, warning=FALSE, eval=FALSE}
-contrib_forplot <- ggplot(contrib_for, aes(x = cand_ici, log10(transaction_amt))) + geom_boxplot()
-
-contrib_forplot
-
-contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici, log10(transaction_amt))) + geom_boxplot(color = "cornflowerblue") + facet_wrap(~for_cand) 
-
-contrib_foragplot
-```
-
-```{r, eval=FALSE}
-library(ggthemes)
-contrib_forplot <- ggplot(contrib_for, aes(x = cand_ici), log10(transaction_amt)) + geom_bar()
-
-contrib_forplot
-```
 
 
-```{r}
-labels<-c(agcan="Against Candidate", forcan="For Candidate")
-
-```
 
 The bar graph implemented here displays the amount of money contributed to the campaigns of: challengers, incumbents, and open seat canidates in the year 2012. The graphic on the left shows money spent against the canidate, and the graphic on the right shows money spent in favor of the canidate. 
 ```{r}
 library(ggthemes)
+labels<-c(agcan="Against Candidate", forcan="For Candidate")
 contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici), transaction_amt) + geom_bar( fill = "darkgoldenrod1") + facet_wrap(~for_cand, labeller=labeller(for_cand=labels)) +
-  theme_economist()+
-  xlab("")+
+  theme_economist()+theme(legend.position = "none",
+        axis.title.x = element_blank(), 
+        axis.title.y = element_text(size=18, family="Andale Mono"),
+         plot.title=element_text(size=20, family = "Andale Mono"), 
+        axis.text.x = element_text(family = "Andale Mono"), 
+        axis.text.y = element_text(family = "Andale Mono"))+
   scale_x_discrete(labels=c("Challenger", "Incumbent", "Open Seat"))+
-  ylab("Total contributions (US $)")
+  ylab("Total contributions (U.S. $)")+
+  labs(title="  Campaign Contributions in 2012")
 
 contrib_foragplot
 ```
@@ -144,7 +109,21 @@ years<-c(1990, 1992, 1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010, 2012,
 
 #contrib_any_year(2004)
 ```
-(^only works in 2012?)
+We tried to do more than one year, but failed because...2012
 
+```{r, warning=FALSE, eval=FALSE}
 
+boxplot <- ggplot(cand_contrib, aes(for_cand, log10(transaction_amt))) + geom_boxplot(color = "cornflowerblue")
+boxplot
+```
+
+```{r, warning=FALSE, eval=FALSE}
+contrib_forplot <- ggplot(contrib_for, aes(x = cand_ici, log10(transaction_amt))) + geom_boxplot()
+
+contrib_forplot
+
+contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici, log10(transaction_amt))) + geom_boxplot(color = "cornflowerblue") + facet_wrap(~for_cand) 
+
+contrib_foragplot
+```
 
