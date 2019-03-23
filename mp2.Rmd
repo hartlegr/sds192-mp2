@@ -21,6 +21,8 @@ wordcountaddin::word_count("mp2.rmd")
 
 ```
 
+We were interested in the sum of contributions made for and against the campaigns of different statuses of canidates (challenger, incumbent, and open seat canidates).
+
 First, we joined the candidates table and the contributions table using the "cand_id."
 ```{r}
 cand_contrib <- candidates%>% 
@@ -43,14 +45,12 @@ cand_contrib <- cand_contrib%>%
  
 ```
 
-
-
-
-
-The bar graph implemented here displays the amount of money contributed to the campaigns of: challengers, incumbents, and open seat canidates in the year 2012. The graphic on the left shows money spent against the canidate, and the graphic on the right shows money spent in favor of the canidate. 
+We used this wrangled data to create the bar graph shown here. It displays the total amount of money contributed in favor of and in opposition of: challengers, incumbents, and open seat canidates in 2012. 
 ```{r}
 library(ggthemes)
+
 labels<-c(agcan="Against Candidate", forcan="For Candidate")
+
 contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici), transaction_amt) + geom_bar( fill = "darkgoldenrod1") + facet_wrap(~for_cand, labeller=labeller(for_cand=labels)) +
   theme_economist()+theme(legend.position = "none",
         axis.title.x = element_blank(), 
@@ -69,7 +69,7 @@ This displays that the most money was spent against challengers, and the least m
 
 We can also see that in 2012, the most money was spent for incumbents by far. Incumbents might have more support because they have had more time to gain the trust of their constituents. (this isn't saying what I'm trying to say lol)
 
-Generalized function:
+Generalized function: We tried to do more than one year, but failed because...2012
 ```{r}
 contrib_any_year<-function(year){
   cand_contrib_yearly<-cand_contrib%>%
@@ -78,13 +78,17 @@ contrib_any_year<-function(year){
   group_by(transaction_type)%>%
   mutate(for_cand = ifelse(transaction_type == "24K"|transaction_type ==  "24E", "forcan","agcan"))
   
-  cand_contrib_yearly
+ cand_contrib_yearly
   
   contrib_foragplot <- ggplot(cand_contrib_yearly, aes(x = cand_ici), transaction_amt) + geom_bar( fill = "darkgoldenrod1") + facet_wrap(~for_cand, labeller=labeller(for_cand=labels)) +
-  theme_economist()+
-  xlab("")+
+  theme_economist()+theme(legend.position = "none",
+        axis.title.x = element_blank(), 
+        axis.title.y = element_text(size=18, family="Andale Mono"),
+         plot.title=element_text(size=20, family = "Andale Mono"), 
+        axis.text.x = element_text(family = "Andale Mono"), 
+        axis.text.y = element_text(family = "Andale Mono"))+
   scale_x_discrete(labels=c("Challenger", "Incumbent", "Open Seat"))+
-  ylab("Total contributions (US $)")
+  ylab("Total contributions (U.S. $)")
 
 contrib_foragplot
 }
@@ -94,9 +98,9 @@ contrib_foragplot
 ```{r}
 years<-c(1990, 1992, 1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010, 2012, 2014)
 
-#contrib_any_year(2004)
+contrib_any_year(2012)
 ```
-We tried to do more than one year, but failed because...2012
+
 
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
 contrib_for <- cand_contrib %>%
