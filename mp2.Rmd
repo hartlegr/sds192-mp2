@@ -11,9 +11,7 @@ output:
 
 ```{r, message=FALSE}
 library(tidyverse)
-load("house_elections.rda")
 load("candidates.rda")
-load("committees.rda")
 load("contributions.rda")
 devtools::install_github("benmarwick/wordcountaddin")
 
@@ -30,7 +28,7 @@ cand_contrib <- candidates%>%
 ```
 
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, echo=FALSE}
 library(Stat2Data)
 tally(~transaction_type, data = cand_contrib)
 ```
@@ -77,7 +75,7 @@ Also interesting:
 
 
 
-Generalized function: We tried to do more than one year, but failed because...2012
+Here is the generalized function that we created. It executes the same data wrangling and produces the same bar graph as above, but with any year. Our hope was to be able to map the function onto every year since 1990 to observe the trends in contributions for and against the three types of canidates.
 ```{r}
 contrib_any_year<-function(year){
   cand_contrib_yearly<-cand_contrib%>%
@@ -102,6 +100,7 @@ contrib_foragplot
 }
 ```
 
+Though the function works, we weren't able to apply it to any year besides 2012 (shown below). The dataset provided on information on canidates on the *last* year that they ran for office, so an incumbent who has been in office since the 1990s would only show up in 2012. This results in a lot of the data needed for this function being not available. 
 
 ```{r}
 years<-c(1990, 1992, 1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010, 2012, 2014)
@@ -110,7 +109,7 @@ contrib_any_year(2012)
 ```
 
 
-```{r, message=FALSE, warning=FALSE, eval=FALSE}
+```{r, message=FALSE, warning=FALSE, eval=FALSE, echo=FALSE}
 contrib_for <- cand_contrib %>%
   filter(!is.na("for_cand"))%>%
   filter(for_cand == "forcan")
@@ -121,13 +120,13 @@ contrib_ag <- cand_contrib %>%
   filter(!is.na("ag_cand"))
 ```
 
-```{r, warning=FALSE, eval=FALSE}
+```{r, warning=FALSE, eval=FALSE, echo=FALSE}
 
 boxplot <- ggplot(cand_contrib, aes(for_cand, log10(transaction_amt))) + geom_boxplot(color = "cornflowerblue")
 boxplot
 ```
 
-```{r, warning=FALSE, eval=FALSE}
+```{r, warning=FALSE, eval=FALSE, echo=FALSE}
 contrib_forplot <- ggplot(contrib_for, aes(x = cand_ici, log10(transaction_amt))) + geom_boxplot()
 
 contrib_forplot
