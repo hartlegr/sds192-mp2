@@ -35,7 +35,7 @@ library(Stat2Data)
 tally(~transaction_type, data = cand_contrib)
 ```
 
-Then, we only filtered out candidates who last ran in 2012, removing the rows with NA data. We grouped by transaction type, and then...
+Then, we filtered for the year 2012, while removing the rows with NA data. This provided us with all the contributions for canidates who last ran for office in 2012. We grouped the contributions by transaction type, and then mutated to add a column called 'for_cand'. This column provided information on whether the contribution was in favor of or in opposition of the canidate listed, listing either 'forcan' or 'agcan' respectively. 
 ```{r}
 cand_contrib <- cand_contrib%>%
   filter(cand_election_yr == 2012)%>% 
