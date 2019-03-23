@@ -65,9 +65,17 @@ contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici), transaction_amt) + 
 contrib_foragplot
 ```
 
-This displays that the most money was spent against challengers, and the least money was spent against canidates where there was no incumbent. However, the variation between the three categories is small. This might be due to...
+This plot conveys that the total money spent on challengers and open seat canidates does not vary significantly when looking at whether the money was spent for or against the campaigns. Incumbents, however, received almost 10 times more money than was spent against them. This is likely because incumbents are already experienced with creating and supporting policies
 
-We can also see that in 2012, the most money was spent for incumbents by far. Incumbents might have more support because they have had more time to gain the trust of their constituents. (this isn't saying what I'm trying to say lol)
+- people know who they are
+- they have already done stuff
+- they have ties and connections in congress that pay off
+
+Also interesting:
+- in all three subgroups, the amount of money spent for canidates was more than spent against
+- the least money spent against canidates was when there was an open seat, because neither person had done things that needed to be condoned OR less of a giant to slay (taking down incumbent)
+
+
 
 Generalized function: We tried to do more than one year, but failed because...2012
 ```{r}
