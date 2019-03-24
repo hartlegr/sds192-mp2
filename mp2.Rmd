@@ -64,12 +64,18 @@ contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici), transaction_amt) + 
 contrib_foragplot
 ```
 
-The plot shows that there is not a significant difference in the money spent for and against the campaigns of both challengers and open seat canidates; the money spent for each group was about the same as the money spent against each group. Incumbents, however, received almost 10 times more money than was spent against them. This is likely because incumbents have much more support from their constituents because they already have experience in office. Though any politician will have both supporters and opposers, an incumbent has had an oppurtunity to show the public how well they can do their job. A challenger is relying more on their word and other, less applicable experiences. More support and exposure yields more money, evidently.
+The plot shows that there is not a large difference in the money spent for and against the campaigns of both challengers and open seat canidates; the money spent for each group was about the same as the money spent against each group. 
 
-Though the amounts were quite different between some of the groups, the distribution of the money was the same for each type of canidate. The total amount of money contributed for canidates was more than the amount contributed against, indicating that those donating money were more concerned with supporting their canidate of choice instead of undermining their opposition. 
+>Incumbents, however, received almost 10 times more money than was spent against them.
 
+This is likely because incumbents have more support from their constituents (or organizations like West Virginians for Life or Holiday Inn Express) because they  have existing connections. Though any politician will have both supporters and opposers, an incumbent has had an oppurtunity to show the public how well they can do their job. A challenger relies more on their word and other (possibly less applicable) experiences. More support and exposure yields more money, evidently.
+
+Though the amounts were quite different between some of the groups, the distribution of the money was the same for each type of candidate. The total amount of money contributed for canidates was more than the amount contributed against, indicating that those donating money were more concerned with supporting their canidate of choice instead of undermining their opposition. 
+
+##For or Against?
 Regarding money spent against any type of canidate, the least was spent against open seat campaigns, and the most was spent against challengers. This could be because canidates who have the most support (and therefore money to spare) are probably the incumbents. Some of their supporters who want to see them stay in office will focus on spending money against the challengers. In open seat elections, both candidates are more politically inexperienced (presumably), and the support from the public is not skewed one way or the other. Considering the sitution, contributions might seen as more valuable in favor of canidates, while oppositional contributions are more of a luxury.
 
+##Function
 Here is the generalized function that we created. It executes the same data wrangling and produces the same bar graph as above, but with any year. Our hope was to be able to map the function onto every year since 1990 to observe the trends in contributions for and against the three types of canidates.
 ```{r}
 contrib_any_year<-function(year){
