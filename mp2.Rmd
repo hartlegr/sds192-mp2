@@ -5,11 +5,12 @@ date: "2019-03-24"
 output: 
   html_document:
       code_folding: hide
+      theme: cosmo
 ---
 
 ^[https://github.com/hartlegr/sds192-mp2]
 
-```{r, message=FALSE}
+```{r, message=FALSE, warning = FALSE}
 library(tidyverse)
 load("candidates.rda")
 load("contributions.rda")
