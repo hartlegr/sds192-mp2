@@ -1,5 +1,5 @@
 ---
-title: "Mini-Project 2"
+title: "Mini-Project 2: Do Incumbents Receive More Money?"
 author: "Grace Hartley, Amrita Acharya, Callie Slevin"
 date: "2019-03-24"
 output: 
@@ -11,10 +11,7 @@ output:
 
 ```{r, message=FALSE}
 library(tidyverse)
-library(extrafont)
-load("house_elections.rda")
 load("candidates.rda")
-load("committees.rda")
 load("contributions.rda")
 devtools::install_github("benmarwick/wordcountaddin")
 
@@ -22,35 +19,21 @@ wordcountaddin::word_count("mp2.rmd")
 
 ```
 
+We were interested in the sum of contributions made for and against the campaigns of different statuses of canidates (challenger, incumbent, and open seat canidates).
+
 First, we joined the candidates table and the contributions table using the "cand_id."
 ```{r}
 cand_contrib <- candidates%>% 
   left_join(contributions, "cand_id")
 ```
 
- 
-```{r, message=FALSE, eval=FALSE}
-cand_contrib%>%
-  filter(cand_election_yr == 2012)%>% 
-  filter(cand_ici== "I")%>%
-  group_by(cand_id, cand_name)%>%
-  summarize(total_cont = sum(transaction_amt, na.rm = TRUE))
-  
-  
 
-```
-
-```{r, eval=FALSE}
-ron_kind <- candidates %>%
-  filter(cand_name == "KIND, RON")
-```
-
-```{r, eval=FALSE}
+```{r, eval=FALSE, echo=FALSE}
 library(Stat2Data)
 tally(~transaction_type, data = cand_contrib)
 ```
 
-Then, we only filtered out candidates who last ran in 2012, removing the rows with NA data. We grouped by transaction type, and then...
+Then, we filtered for the year 2012, while removing the rows with NA data. This provided us with all the contributions for canidates who last ran for office in 2012. We grouped the contributions by transaction type, and then mutated to add a column called 'for_cand'. This column provided information on whether the contribution was in favor of or in opposition of the canidate listed, listing either 'forcan' or 'agcan' respectively. 
 ```{r}
 cand_contrib <- cand_contrib%>%
   filter(cand_election_yr == 2012)%>% 
@@ -60,8 +43,67 @@ cand_contrib <- cand_contrib%>%
  
 ```
 
+We used this wrangled data to create the bar graph shown here. It displays the total amount of money contributed in favor of and in opposition of: challengers, incumbents, and open seat canidates in 2012. 
+```{r}
+library(ggthemes)
 
-```{r, message=FALSE, warning=FALSE}
+labels<-c(agcan="Against Candidate", forcan="For Candidate")
+
+contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici), transaction_amt) + geom_bar( fill = "darkgoldenrod1") + facet_wrap(~for_cand, labeller=labeller(for_cand=labels)) +
+  theme_economist()+theme(legend.position = "none",
+        axis.title.x = element_blank(), 
+        axis.title.y = element_text(size=18, family="Andale Mono"),
+         plot.title=element_text(size=20, family = "Andale Mono"), 
+        axis.text.x = element_text(family = "Andale Mono"), 
+        axis.text.y = element_text(family = "Andale Mono"))+
+  scale_x_discrete(labels=c("Challenger", "Incumbent", "Open Seat"))+
+  ylab("Total contributions (U.S. $)")+
+  labs(title="  Campaign Contributions in 2012")
+
+contrib_foragplot
+```
+
+The plot shows that there is not a significant difference in the money spent for and against the campaigns of both challengers and open seat canidates; the money spent for each group was about the same as the money spent against each group. Incumbents, however, received almost 10 times more money than was spent against them. This is likely because incumbents have much more support from their constituents because they already have experience in office. Though any politician will have both supporters and opposers, an incumbent has had an oppurtunity to show the public how well they can do their job. A challenger is relying more on their word and other, less applicable experiences. More support and exposure yields more money, evidently.
+
+Though the amounts were quite different between some of the groups, the distribution of the money was the same for each type of canidate. The total amount of money contributed for canidates was more than the amount contributed against, indicating that those donating money were more concerned with supporting their canidate of choice instead of undermining their opposition. 
+
+Regarding money spent against any type of canidate, the least was spent against open seat campaigns, and the most was spent against challengers. This could be because canidates who have the most support (and therefore money to spare) are probably the incumbents. Some of their supporters who want to see them stay in office will focus on spending money against the challengers. In open seat elections, both candidates are more politically inexperienced (presumably), and the support from the public is not skewed one way or the other. Considering the sitution, contributions might seen as more valuable in favor of canidates, while oppositional contributions are more of a luxury.
+
+Here is the generalized function that we created. It executes the same data wrangling and produces the same bar graph as above, but with any year. Our hope was to be able to map the function onto every year since 1990 to observe the trends in contributions for and against the three types of canidates.
+```{r}
+contrib_any_year<-function(year){
+  cand_contrib_yearly<-cand_contrib%>%
+  filter(cand_election_yr == year)%>% 
+  na.omit() %>%
+  group_by(transaction_type)%>%
+  mutate(for_cand = ifelse(transaction_type == "24K"|transaction_type ==  "24E", "forcan","agcan"))
+  
+ cand_contrib_yearly
+  
+  contrib_foragplot <- ggplot(cand_contrib_yearly, aes(x = cand_ici), transaction_amt) + geom_bar( fill = "darkgoldenrod1") + facet_wrap(~for_cand, labeller=labeller(for_cand=labels)) +
+  theme_economist()+theme(legend.position = "none",
+        axis.title.x = element_blank(), 
+        axis.title.y = element_text(size=18, family="Andale Mono"),
+         plot.title=element_text(size=20, family = "Andale Mono"), 
+        axis.text.x = element_text(family = "Andale Mono"), 
+        axis.text.y = element_text(family = "Andale Mono"))+
+  scale_x_discrete(labels=c("Challenger", "Incumbent", "Open Seat"))+
+  ylab("Total contributions (U.S. $)")
+
+contrib_foragplot
+}
+```
+
+Though the function works, we weren't able to apply it to any year besides 2012 (shown below). The dataset provided on information on canidates in the *last* year that they ran for office, so an incumbent who has been in office since the 1990s would only show up in 2012. This results in a lot of the data needed for this function being not available. 
+
+```{r}
+years<-c(1990, 1992, 1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010, 2012, 2014)
+
+contrib_any_year(2012)
+```
+
+
+```{r, message=FALSE, warning=FALSE, eval=FALSE, echo=FALSE}
 contrib_for <- cand_contrib %>%
   filter(!is.na("for_cand"))%>%
   filter(for_cand == "forcan")
@@ -72,13 +114,13 @@ contrib_ag <- cand_contrib %>%
   filter(!is.na("ag_cand"))
 ```
 
-```{r, warning=FALSE, eval=FALSE}
+```{r, warning=FALSE, eval=FALSE, echo=FALSE}
 
 boxplot <- ggplot(cand_contrib, aes(for_cand, log10(transaction_amt))) + geom_boxplot(color = "cornflowerblue")
 boxplot
 ```
 
-```{r, warning=FALSE, eval=FALSE}
+```{r, warning=FALSE, eval=FALSE, echo=FALSE}
 contrib_forplot <- ggplot(contrib_for, aes(x = cand_ici, log10(transaction_amt))) + geom_boxplot()
 
 contrib_forplot
@@ -87,64 +129,4 @@ contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici, log10(transaction_am
 
 contrib_foragplot
 ```
-
-```{r, eval=FALSE}
-library(ggthemes)
-contrib_forplot <- ggplot(contrib_for, aes(x = cand_ici), log10(transaction_amt)) + geom_bar()
-
-contrib_forplot
-```
-
-
-```{r}
-labels<-c(agcan="Against Candidate", forcan="For Candidate")
-
-```
-
-The bar graph implemented here displays the amount of money contributed to the campaigns of: challengers, incumbents, and open seat canidates in the year 2012. The graphic on the left shows money spent against the canidate, and the graphic on the right shows money spent in favor of the canidate. 
-```{r}
-library(ggthemes)
-contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici), transaction_amt) + geom_bar( fill = "darkgoldenrod1") + facet_wrap(~for_cand, labeller=labeller(for_cand=labels)) +
-  theme_economist()+
-  xlab("")+
-  scale_x_discrete(labels=c("Challenger", "Incumbent", "Open Seat"))+
-  ylab("Total contributions (US $)")
-
-contrib_foragplot
-```
-
-This displays that the most money was spent against challengers, and the least money was spent against canidates where there was no incumbent. However, the variation between the three categories is small. This might be due to...
-
-We can also see that in 2012, the most money was spent for incumbents by far. Incumbents might have more support because they have had more time to gain the trust of their constituents. (this isn't saying what I'm trying to say lol)
-
-Generalized function:
-```{r}
-contrib_any_year<-function(year){
-  cand_contrib_yearly<-cand_contrib%>%
-  filter(cand_election_yr == year)%>% 
-  na.omit() %>%
-  group_by(transaction_type)%>%
-  mutate(for_cand = ifelse(transaction_type == "24K"|transaction_type ==  "24E", "forcan","agcan"))
-  
-  cand_contrib_yearly
-  
-  contrib_foragplot <- ggplot(cand_contrib_yearly, aes(x = cand_ici), transaction_amt) + geom_bar( fill = "darkgoldenrod1") + facet_wrap(~for_cand, labeller=labeller(for_cand=labels)) +
-  theme_economist()+
-  xlab("")+
-  scale_x_discrete(labels=c("Challenger", "Incumbent", "Open Seat"))+
-  ylab("Total contributions (US $)")
-
-contrib_foragplot
-}
-```
-
-
-```{r}
-years<-c(1990, 1992, 1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010, 2012, 2014)
-
-#contrib_any_year(2004)
-```
-(^only works in 2012?)
-
-
 
