@@ -53,7 +53,7 @@ labels<-c(agcan="Against Candidate", forcan="For Candidate")
 contrib_foragplot <- ggplot(cand_contrib, aes(x = cand_ici), transaction_amt) + geom_bar( fill = "darkgoldenrod1") + facet_wrap(~for_cand, labeller=labeller(for_cand=labels)) +
   theme_economist()+theme(legend.position = "none",
         axis.title.x = element_blank(), 
-        axis.title.y = element_text(size=18, family="Andale Mono"),
+        axis.title.y = element_text(size=16, family="Andale Mono"),
          plot.title=element_text(size=20, family = "Andale Mono"), 
         axis.text.x = element_text(family = "Andale Mono"), 
         axis.text.y = element_text(family = "Andale Mono"))+
@@ -89,7 +89,7 @@ contrib_any_year<-function(year){
   contrib_foragplot <- ggplot(cand_contrib_yearly, aes(x = cand_ici), transaction_amt) + geom_bar( fill = "darkgoldenrod1") + facet_wrap(~for_cand, labeller=labeller(for_cand=labels)) +
   theme_economist()+theme(legend.position = "none",
         axis.title.x = element_blank(), 
-        axis.title.y = element_text(size=18, family="Andale Mono"),
+        axis.title.y = element_text(size=16, family="Andale Mono"),
          plot.title=element_text(size=20, family = "Andale Mono"), 
         axis.text.x = element_text(family = "Andale Mono"), 
         axis.text.y = element_text(family = "Andale Mono"))+
